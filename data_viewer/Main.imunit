@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Imaginet version="2.0.0.0">
+  <Compound unit="e2e038a0-e281-4de4-a43c-355bd5afec8d">
+    <Nodes>
+      <UnitNode id="node_10" x="995.1433333333332" y="444.045" enabled="true" name="Original Spectrogram" unit="ImagimobStudio.Modules.DataTrack" />
+      <UnitNode id="node_5" x="639.3433333333332" y="234.045" enabled="true" name="Processed Microphone Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <UnitNode id="node_2" x="-106.98500000000013" y="205.37500000000006" enabled="true" unit="Imaginet.Units.Io.Microphone">
+        <Int32Argument param="device_id">0</Int32Argument>
+        <Int32Argument param="channels">2</Int32Argument>
+      </UnitNode>
+      <UnitNode id="node_3" x="645.8050000000001" y="654.045" enabled="true" name="Original Microphone Data" unit="ImagimobStudio.Modules.DataTrack" />
+      <UnitNode id="node_12" x="621.3088289246859" y="-12.748828924685853" enabled="true" unit="Imaginet.Units.Signal.MelSpectrogram" />
+      <UnitNode id="node_4" x="350.46833333333325" y="418.895" enabled="true" unit="Imaginet.Units.Math.Select">
+        <Int32Argument param="count">1</Int32Argument>
+        <Int32Argument param="index">0</Int32Argument>
+      </UnitNode>
+      <UnitNode id="node_6" x="350.46833333333325" y="194.895" enabled="true" unit="Imaginet.Units.Math.Select">
+        <Int32Argument param="axis">0</Int32Argument>
+        <Int32Argument param="count">1</Int32Argument>
+        <Int32Argument param="index">1</Int32Argument>
+      </UnitNode>
+      <UnitNode id="node_11" x="620.145" y="408.4149999999999" enabled="true" unit="Imaginet.Units.Signal.MelSpectrogram" />
+      <UnitNode id="node_9" x="988.6816666666666" y="24.044999999999987" enabled="true" name="Processed Spectrogram" unit="ImagimobStudio.Modules.DataTrack" />
+    </Nodes>
+    <Connections>
+      <Connection>
+        <Source node="node_2" param="data" />
+        <Target node="node_4" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_4" param="output" />
+        <Target node="node_3" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_2" param="data" />
+        <Target node="node_6" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_6" param="output" />
+        <Target node="node_5" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_6" param="output" />
+        <Target node="node_12" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_12" param="output" />
+        <Target node="node_9" param="data" />
+      </Connection>
+      <Connection>
+        <Source node="node_4" param="output" />
+        <Target node="node_11" param="input" />
+      </Connection>
+      <Connection>
+        <Source node="node_11" param="output" />
+        <Target node="node_10" param="data" />
+      </Connection>
+    </Connections>
+  </Compound>
+</Imaginet>
