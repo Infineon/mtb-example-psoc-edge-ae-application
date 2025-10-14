@@ -80,8 +80,8 @@ LR_XIP_PORT0 (CYMEM_CM55_0_m55_nvm_sel_START + MCUBOOT_HEADER_SIZE) (CYMEM_CM55_
   }
 
   /* The execution region for performance-sensitive or critical functions that need to be executed in SRAM */
-  /* Reserving the first 8 bytes to avoid debug symbols (that have default address 0x0) to be confused with actual code */
-  app_code_ram (CYMEM_CM55_0_m55_code_INTERNAL_START +16) (CYMEM_CM55_0_m55_code_SIZE - 16)
+  /* Reserving the first 16 bytes to avoid debug symbols (that have default address 0x0) to be confused with actual code */
+  app_code_ram (CYMEM_CM55_0_m55_code_INTERNAL_START + 16) (CYMEM_CM55_0_m55_code_SIZE - 16)
   {
     *(.cy_itcm)
     *(.cy_sram_code)
@@ -173,6 +173,7 @@ LR_XIP_PORT0 (CYMEM_CM55_0_m55_nvm_sel_START + MCUBOOT_HEADER_SIZE) (CYMEM_CM55_
   /* A region for initialized data memory */
   app_data_main CYMEM_CM55_0_m55_data_INTERNAL_START CYMEM_CM55_0_m55_data_SIZE
   {
+    *(.cy_dtcm)
     .ANY (+RW +ZI)
     . = ALIGN(4);
     *(.dtcm_data)

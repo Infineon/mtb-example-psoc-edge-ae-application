@@ -265,10 +265,10 @@ SECTIONS
     } > m55_nvm_sel
 
     /* A section for performance-sensitive or critical functions that need to be executed in ITCM */
-    .app_code_itcm : ALIGN(4)
+    .app_code_itcm : ALIGN(16)
     {
-        /* Reserving the first 8 bytes to avoid debug symbols (that have default address 0x0) to be confused with actual code  */
-        . += 8;
+        /* Reserving the first 16 bytes to avoid debug symbols (that have default address 0x0) to be confused with actual code  */
+        . += 16;
         KEEP(*(.cy_itcm))
         KEEP(*(.cy_sram_code))
         KEEP(*(.cy_ramfunc))
@@ -345,7 +345,7 @@ SECTIONS
         *cyhal_audio_common.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
         
         *sp_enh.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
-    	
+        
         *libusbd_base_d_cm55f_llvm_arm.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
         *libusbd_base_r_cm55f_llvm_arm.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
 
@@ -410,6 +410,10 @@ SECTIONS
         PROVIDE_HIDDEN (__fini_array_end = .);
 
         KEEP(*(.jcr*))
+
+        . = ALIGN(4);
+
+        KEEP(*(.cy_dtcm))
 
         . = ALIGN(4);
 

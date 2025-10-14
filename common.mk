@@ -7,8 +7,8 @@
 #
 ################################################################################
 # \copyright
-# Copyright 2025, Cypress Semiconductor Corporation (an Infineon company)
-# SPDX-License-Identifier: Apache-2.0
+# (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+# Technologies AG.  SPDX-License-Identifier: Apache-2.0
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ CONFIG_AE_MODE=FUNCTIONAL
 
 # Search path for
 # 1. Common source code shared between CM33 and CM55 cores.
-# 2. Third party licensed code.
+#
 
 SEARCH+=../common_modules
 
