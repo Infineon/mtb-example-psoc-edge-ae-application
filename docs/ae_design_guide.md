@@ -233,12 +233,42 @@ For real-time preview of spectrogram, the code example includes a DEEPCRAFT&trad
     ![](../images/deepcraft_studio_spectrogram.png) 
 
 
+## Automatic Gain Control (AGC)
+This code example also supports Automatic Gain Control (AGC) on Audio Enhancement processed data. After AE processing, the processed data can be sent to AGC algorithm for gain control. By default, this is disabled in the code example.
+To enable AGC, enable `CONFIG_AGC_MODE` in Makefile of proj_cm55 (proj_cm55/Makefile).
+
+
+```
+# Automatic Gain Control
+# AGC_ON    - Enables AGC on Audio Enhancement processed data.
+# AGC_OFF   - Disables AGC on Audio Enhancement processed data. (Default value)
+CONFIG_AGC_MODE=AGC_ON
+
+```
+
+## AGC in *functional* mode
+
+If AGC is enabled in *functional* mode, the output will have AGC applied to it. In the mono channel USB audio to PC, when blue LED is glowing, the AE processed data will also be processed by AGC.
+
+## AGC in *tuning* mode
+
+If AGC is enabled in *debug* mode, the quad channel USB audio to PC will have the following data,
+
+**Figure 24. Quad Channel USB data with AGC off/AGC on**
+
+![](../images/agc_usb_output.png)
+
 ## KPI
 
 The memory and MCPS of Audio Enhancement with all AFE components enabled on PSOC&trade; Edge MCU is shown in the **Figure 24**,
 
-**Figure 24. Table showing the memory and MCPS for Audio Enhancement on PSOC&trade; Edge MCU**
+**Figure 25. Table showing the memory and MCPS for Audio Enhancement on PSOC&trade; Edge MCU**
 ![](../images/memory_mcps.png)
+
+**Figure 26. Table showing memory and MCPS for Automatic Gain Control**
+
+![](../images/agc_memory_mcps.png)
+
 
 To provide the highest performance while executing the code example, The AFE middleware's scratch and persistent memory are placed in the tightly coupled memory section (TCM).
 
@@ -273,7 +303,7 @@ To profile the AFE middleware for the cycles:
 1. Enable the following in the *Makefile* of *proj_cm55*:
 
     ```
-    #For Profilier
+    #For Profiler
     COMPONENTS += PROFILER
     DEFINES += PROFILER_ENABLE
     ```
@@ -286,7 +316,7 @@ To profile the AFE middleware for the cycles:
 
 The speech quality scores for every AFE component is shown as benchmark reference.
 
-**Figure 25. Table showing speech quality scores**
+**Figure 27. Table showing speech quality scores**
 ![](../images/ae_quality.png)
 
 > **Note:** To calculate the speech quality scores on the kit, you can generate your own test streams and see the Deep Noise Suppression Challenge repo on GitHub (https://github.com/microsoft/DNS-Challenge) for creating the Python scripts.

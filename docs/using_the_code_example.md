@@ -40,7 +40,7 @@ The 'project-creator-cli' tool can be used to create applications from a CLI ter
 
 Use a CLI terminal to invoke the 'project-creator-cli' tool. On Windows, use the command-line 'modus-shell' program provided in the ModusToolbox&trade; installation instead of a standard Windows command-line application. This shell provides access to all ModusToolbox&trade; tools. You can access it by typing "modus-shell" in the search box in the Windows menu. In Linux and macOS, you can use any terminal application.
 
-The following example clones the "[AE](https://github.com/Infineon/mtb-example-psoc-edge-afe-application)" application with the desired name "AEApplication" configured for the *KIT_PSE84_EVAL_EPC4* or *KIT_PSE84_EVAL_EPC2* BSP into the specified working directory, *C:/ae*:
+The following example clones the "[AE](https://github.com/Infineon/mtb-example-psoc-edge-ae-application)" application with the desired name "AEApplication" configured for the *KIT_PSE84_EVAL_EPC4* or *KIT_PSE84_EVAL_EPC2* BSP into the specified working directory, *C:/ae*:
 
    ```
    project-creator-cli --board-id KIT_PSE84_EVAL_EPC4 --app-id mtb-example-psoc-edge-ae-application --user-app-name AEApplication --target-dir "C:/ae"

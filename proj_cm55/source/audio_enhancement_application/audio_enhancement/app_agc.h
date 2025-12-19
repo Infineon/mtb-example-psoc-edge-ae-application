@@ -1,8 +1,8 @@
 /******************************************************************************
-* File Name : cy_user_interaction.h
+* File Name : app_agc.h
 *
 * Description :
-* Header file for interaction via user button.
+* Header file for Automatic Gain Control
 ********************************************************************************
  * (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
  * Technologies AG. All rights reserved.
@@ -33,36 +33,44 @@
  * thereof can reasonably be expected to result in personal injury.
 *******************************************************************************/
 
-/*******************************************************************************
-* Header Files
-*******************************************************************************/
+#ifndef __APP_AGC_H__
+#define __APP_AGC_H__
 
-#include "user_interaction.h"
+#ifdef __cplusplus
+extern "C" {
+#endif  /* __cplusplus */
 
-#include "button_press.h"
-#include "cybsp.h"
+#include "ifx_pre_post_process.h"
+#include "ifx_sp_utils_priv.h"
 #include "stdlib.h"
+//#include "ifx_agc_config_prms.h"
 
 /*******************************************************************************
-* Function Name: user_interaction_init
-********************************************************************************
-* Summary:
-* User interaction thread.
-*
-* Parameters:
-*  mode - mode
-*  user_action_cb - callback for user action
-* Return:
-*  None
-*
+* Macros
 *******************************************************************************/
 
-void user_interaction_init(user_interaction_t mode, cb_user_action user_action_cb)
-{
-    if (mode == USER_INTERACTION_BUTTON)
-    {
-        user_button_init((cb_user_action)user_action_cb);
-    }
-}
+#define AGC_SUCCESS                 (0)
+#define AGC_FAILURE                 (-1)
 
-/* [] END OF FILE */
+#define AGC_PARAM_SAMPLING_RATE     (16000)
+#define AGC_PARAM_FRAME_SIZE        (AGC_PARAM_SAMPLING_RATE/100)
+#define AGC_PARAM_SNR_TH            (15)
+#define AGC_PARAM_TH_REL            (21)
+#define AGC_PARAM_ATT_TIME_MS       (1)
+#define AGC_PARAM_RELEASE_TIME_MS   (30)
+#define AGC_PARAM_RATIO             (5)
+#define AGC_PARAM_MGAIN_DB          (15)
+#define AGC_PARAM_SMOOTH_MODE       (0)
+
+/*******************************************************************************
+ * Function Prototypes
+ *******************************************************************************/
+int agc_init(void);
+int agc_process(int16_t *input_data, int16_t *output_data);
+int agc_deinit(void);
+
+
+#ifdef __cplusplus
+} /*extern "C" */
+#endif  /* __cplusplus */
+#endif /* __APP_AGC_H__ */

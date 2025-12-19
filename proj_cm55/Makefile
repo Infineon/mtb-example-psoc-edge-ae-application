@@ -125,13 +125,22 @@ POSTBUILD+=
 ################################################################################
 # Application specific Configurations to use COMPONENTS, DEFINES and flags.
 ################################################################################
+
+# Automatic Gain Control
+# AGC_ON    - Enables AGC on Audio Enhancement processed data.
+# AGC_OFF   - Disables AGC on Audio Enhancement processed data. (Default value)
+CONFIG_AGC_MODE=AGC_OFF
+ifeq ($(CONFIG_AGC_MODE),AGC_ON)
+    DEFINES += ENABLE_IFX_AGC
+endif
+
 DEFINES += CY_RETARGET_IO_CONVERT_LF_TO_CRLF
 
 #Application Logger
 COMPONENTS +=APP_LOGGER
 COMPONENTS +=RETARGET_IO
 
-#For Profilier
+#For Profiler
 DEFINES += PROFILER_ENABLE
 COMPONENTS+=PROFILER
 
@@ -148,6 +157,8 @@ DEFINES += CY_AFE_ENABLE_TUNING_FEATURE
 DEFINES+=DSNS_ENABLE_MTB_ML
 COMPONENTS+=MW_DSNS_MODEL MW_MDL_DSNS MW_MDL_DSES
 DEFINES+=USE_MTB_ML
+
+
 
 ifeq ($(CONFIG_VOICE_CORE_MODE),LIMITED)
     COMPONENTS+=AVC_DEMO
@@ -194,6 +205,7 @@ DEFINES +=GAIN_CONTROL_ON
 DEFINES +=AFE_MIN_MIC_INPUT_HW_GAIN=-103.0
 DEFINES +=AFE_MAX_MIC_INPUT_HW_GAIN=71.0
 
+COMPONENTS +=AUDIO_MW
 
 
 ################################################################################
@@ -226,5 +238,6 @@ CY_COMPILER_PATH?=
 
 CY_AFE_PATH=$(SEARCH_audio-front-end)
 CY_AVC_PATH=$(SEARCH_audio-voice-core)
+
 
 include $(CY_TOOLS_DIR)/make/start.mk

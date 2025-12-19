@@ -17,7 +17,8 @@ This code example uses the Peripheral Driver Library (PDL) to interface with per
 > 2. The audio-voice-core library included in this example has a limited operation of about 15 minutes. For the unlimited license, contact Infineon support. Refer to [Using the code example](docs/using_the_code_example.md) or refer the notes.md in proj_cm55\source\modules\audio_voice_core_lib for placing the licensed version of library within the code folder structure
 > 3. On 15 minute timeout, the code will stop. See the Terminal output for more information, reset the board
 > 4. This code example supports only the Arm&reg; and LLVM compilers which need to be installed separately. See "Software Setup" section below.
-> 5. The example has two modes of operation: functional and tuning modes
+> 5. The code example has two modes of operation: functional and tuning modes
+> 6. The code example also supports Automatic Gain Control (AGC) on AE processed data. By default, it is disabled. Refer to the [Design guide](docs/ae_design_guide.md) for its usage
 
 
 ## Requirements
@@ -164,6 +165,7 @@ Document title: *CE241960* - *PSOC&trade; Edge MCU: DEEPCRAFT&trade; Audio Enhan
  1.x.0   | New code example <br> Early access release
  2.0.0   | GitHub release
  2.0.1   | Fix asset dependencies to latest tag for github release and sync to latest BSP & AFE. PDM mics with 24bit word size and Software gain
+ 2.0.2   | Added Automatic Gain Control (AGC) that can be configured at compile-time. AFE algorithm improvements for AEC/ES to have lower MCPS.
 <br>
 
 

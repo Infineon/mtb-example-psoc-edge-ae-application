@@ -89,7 +89,7 @@ extern afe_usb_settings_t MY_AFE_USB_SETTINGS;
 
 // Static settings for middleware and application
 #define AFE_INPUT_NUMBER_CHANNELS   2
-#define AFE_CONFIG_BULK_DELAY       1
+#define AFE_CONFIG_BULK_DELAY       0
 #define AFE_FRAME_SIZE_MS	    10
 #define AFE_FRAME_RATE_SPS	    16000
 

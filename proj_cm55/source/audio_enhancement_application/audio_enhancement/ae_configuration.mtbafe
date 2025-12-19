@@ -2,7 +2,7 @@
     "aec": {
         "aec_reference": "none",
         "aec_state": "on",
-        "bulk_delay_ms": 1,
+        "bulk_delay_ms": 0,
         "echo_tail_ms": 64
     },
     "app": "AFE",
