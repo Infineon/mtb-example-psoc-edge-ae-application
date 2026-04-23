@@ -7,7 +7,7 @@
 #
 ################################################################################
 # \copyright
-# (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+# (c) 2025-2026, Infineon Technologies AG, or an affiliate of Infineon
 # Technologies AG.  SPDX-License-Identifier: Apache-2.0
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -145,7 +145,7 @@ DEFINES += PROFILER_ENABLE
 COMPONENTS+=PROFILER
 
 #AFE middleware priority
-#DEFINES +=AFE_AUDIO_PROCESSING_TASK_PRIORITY=2
+DEFINES +=AFE_AUDIO_PROCESSING_TASK_PRIORITY=2
 
 #AFE configuration and related macros
 COMPONENTS += CMSIS_DSP
@@ -204,9 +204,6 @@ DEFINES+=TLV320DAC3100_PROCESSING_BLOCK=0x10
 DEFINES +=GAIN_CONTROL_ON
 DEFINES +=AFE_MIN_MIC_INPUT_HW_GAIN=-103.0
 DEFINES +=AFE_MAX_MIC_INPUT_HW_GAIN=71.0
-
-COMPONENTS +=AUDIO_MW
-
 
 ################################################################################
 # Paths

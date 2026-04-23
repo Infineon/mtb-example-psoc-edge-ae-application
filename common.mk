@@ -7,7 +7,7 @@
 #
 ################################################################################
 # \copyright
-# (c) 2025, Infineon Technologies AG, or an affiliate of Infineon
+# (c) 2025-2026, Infineon Technologies AG, or an affiliate of Infineon
 # Technologies AG.  SPDX-License-Identifier: Apache-2.0
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ TARGET=KIT_PSE84_EVAL_EPC2
 
 # Name of toolchain to use. Options include:
 # ARM      - Arm Compiler for Embedded (must be installed separately - version 6.22).
-# LLVM_ARM - LLVM Compiler for Arm ((must be installed separately -version 19.1.5).
+# LLVM_ARM - LLVM Compiler for Arm (must be installed separately -version 19.1.5).
 
 TOOLCHAIN=LLVM_ARM
 
