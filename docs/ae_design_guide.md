@@ -20,7 +20,7 @@ In **functional** mode, The PSOC&trade; Edge MCU enumerates as a **USB Audio Ste
 
 Any audio stream can be played from the PC and streamed over the **USB Audio Stereo Speaker** device to the PSOC&trade; Edge MCU. This audio stream received over USB is played back on the PSOC&trade; Edge MCU onboard speaker and also used as the AEC reference. The AFE components use the PDM audio data and USB reference data and processes the PDM audio data. The AFE middleware outputs the processed audio data. This is sent via USB back to the PC. On the PC, this data is received over the **USB Audio Mono channel** microphone device in **functional** mode.
 
-The user button (USER_BTN1) controls whether the AE-processed or unprocessed data is received back on the PC. If the LED is blue, it means the AE-processed data is received over USB.
+The user button (USER_BTN1 in Eval kit and SW1 in AI kit) controls whether the AE-processed or unprocessed data is received back on the PC. If the LED is blue, it means the AE-processed data is received over USB.
 
 You can visualize the data using Audacity and play back the received audio data also using PC speakers.
 
@@ -258,6 +258,7 @@ If AGC is enabled in *debug* mode, the quad channel USB audio to PC will have th
 
 ![](../images/agc_usb_output.png)
 
+
 ## KPI
 
 The memory and MCPS of Audio Enhancement with all AFE components enabled on PSOC&trade; Edge MCU is shown in the **Figure 24**,
@@ -269,6 +270,7 @@ The memory and MCPS of Audio Enhancement with all AFE components enabled on PSOC
 
 ![](../images/agc_memory_mcps.png)
 
+Note that this section documents the KPI with the default models/algorithms as part of audio-voice-core MW asset.
 
 To provide the highest performance while executing the code example, The AFE middleware's scratch and persistent memory are placed in the tightly coupled memory section (TCM).
 
@@ -286,15 +288,20 @@ The code uses custom linker scripts to place critical code and libraries in TCM 
 
 See the linker scripts for the file placement and data placement in the respective sections.
 
-The custom linker scripts are placed in:
+The custom linker scripts (depending on the Kit type) are placed in:
 
 - *\templates\TARGET_KIT_PSE84_EVAL_EPC4\COMPONENT_CM55\TOOLCHAIN_ARM\pse84_ns_cm55.sct*
 
 - *\templates\TARGET_KIT_PSE84_EVAL_EPC2\COMPONENT_CM55\TOOLCHAIN_ARM\pse84_ns_cm55.sct*
 
+- *\templates\TARGET_KIT_PSE84_AI\COMPONENT_CM55\TOOLCHAIN_ARM\pse84_ns_cm55.sct*
+
 - *\templates\TARGET_KIT_PSE84_EVAL_EPC4\COMPONENT_CM55\TOOLCHAIN_LLVM_ARM\pse84_ns_cm55.ld*
 
 - *\templates\TARGET_KIT_PSE84_EVAL_EPC2\COMPONENT_CM55\TOOLCHAIN_ARM\pse84_ns_cm55.ld*
+
+- *\templates\TARGET_KIT_PSE84_AI\COMPONENT_CM55\TOOLCHAIN_LLVM_ARM\pse84_ns_cm55.ld*
+
 
 Depending on the chosen compiler and BSP, one of the above is used. The custom linker scripts are auto-copied to the BSP folder while importing the project. If you make any modifications to them, you have to manually copy them to the bsp folder.
 
@@ -346,10 +353,10 @@ The test stream is available in
 
 1. Play it on any media player application. Use Audacity to record
 
-2. Press user button (USER_BTN1) to see the waveforms change
+2. Press user button (USER_BTN1 in Eval kit and SW1 in AI kit) to see the waveforms change
 
 You can also listen to the audio that is recorded to hear the differences in the processed and unprocessed streams.
 
-The code can also be executed without playing out anything on the device speaker. For example, to check Noise Suppression, Beamforming with ambient noise, just record the USB audio and switch between AE processed and unprocessed audio via USER_BTN1 and observe the difference in captured audio
+The code can also be executed without playing out anything on the device speaker. For example, to check Noise Suppression, Beamforming with ambient noise, just record the USB audio and switch between AE processed and unprocessed audio via user-button and observe the difference in captured audio
 
 <br>

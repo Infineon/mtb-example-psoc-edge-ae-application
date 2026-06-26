@@ -38,8 +38,6 @@
 *******************************************************************************/
 
 #include "app_logger.h"
-#include "cycfg_pins.h"
-#include "cybsp_types.h"
 #include "ae_application.h"
 #include "pdm_mic_interface.h"
 #include "usb_audio_interface.h"
@@ -48,11 +46,15 @@
 #include "i2s_playback.h"
 #include "audio_enhancement_interface.h"
 
+
 /*******************************************************************************
 * Global Variables
 *******************************************************************************/
 volatile bool ae_toggle_flag = true;
-
+#ifdef PSE84_AI_KIT
+static TimerHandle_t led_pwm_timer = NULL;
+static volatile uint8_t led_pwm_counter = 0;
+#endif /* PSE84_AI_KIT */
 
 /*******************************************************************************
 * Function Name: ae_user_btn_callback
@@ -71,15 +73,51 @@ volatile bool ae_toggle_flag = true;
 void ae_user_btn_callback(void)
 {
     ae_toggle_flag = !ae_toggle_flag;
-    if (ae_toggle_flag)
+    if (!ae_toggle_flag)
     {
-        Cy_GPIO_Write(CYBSP_LED_BLUE_PORT, CYBSP_LED_BLUE_PIN, CYBSP_LED_STATE_ON);
+        Cy_GPIO_Write(BLUE_LED_PORT, BLUE_LED_PIN, CYBSP_LED_STATE_OFF);
     }
+#ifndef PSE84_AI_KIT
+/* For AI kit, handle the brightness in timer callback */
     else
     {
-        Cy_GPIO_Write(CYBSP_LED_BLUE_PORT, CYBSP_LED_BLUE_PIN, CYBSP_LED_STATE_OFF);
+        Cy_GPIO_Write(BLUE_LED_PORT, BLUE_LED_PIN, CYBSP_LED_STATE_ON);
+    }
+
+#endif /* PSE84_AI_KIT */
+}
+
+#ifdef PSE84_AI_KIT
+/*******************************************************************************
+* Function Name: led_pwm_timer_cb
+********************************************************************************
+* Summary:
+* Software timer callback to generate PWM on the Blue LED.
+* Called every 1 ms. Turns LED ON for LED_PWM_ON_MS ticks, then OFF for the
+* remainder of LED_PWM_PERIOD_MS, achieving reduced brightness.
+*******************************************************************************/
+static void led_pwm_timer_cb(TimerHandle_t xTimer)
+{
+    (void)xTimer;
+    led_pwm_counter++;
+    if (led_pwm_counter >= LED_PWM_PERIOD_MS)
+    {
+        led_pwm_counter = 0;
+    }
+
+    if (ae_toggle_flag)
+    {    
+        if (led_pwm_counter < LED_PWM_ON_MS)
+        {
+            Cy_GPIO_Write(BLUE_LED_PORT, BLUE_LED_PIN, CYBSP_LED_STATE_ON);
+        }
+        else
+        {
+            Cy_GPIO_Write(BLUE_LED_PORT, BLUE_LED_PIN, CYBSP_LED_STATE_OFF);
+        }
     }
 }
+#endif /* PSE84_AI_KIT */
 
 /*******************************************************************************
 * Function Name: ae_user_btn_init
@@ -149,7 +187,7 @@ void ae_application()
     app_log_print("Note: \r\n Refer to the README.md/ae_design_guide.md of this CE for details of different configurations and tuning via AFE configurator\r\n");
 
     /* PDM mic initialization. Initialize if PDM mic is choosen as the input-mode.
-     * PDM mic data arrives via ISR.
+    * PDM mic data arrives via ISR.
     */
 #if AFE_INPUT_SOURCE==AFE_INPUT_SOURCE_MIC
     result = pdm_mic_interface_init();
@@ -178,10 +216,26 @@ void ae_application()
 
 void led_init_hp()
 {
+#ifdef PSE84_AI_KIT	
+
+/* Control the brightness of AI kit LED */
+/* Create a 1 ms periodic software timer for LED PWM */
+    led_pwm_timer = xTimerCreate("led_pwm",
+                                pdMS_TO_TICKS(1),
+                                pdTRUE,
+                                NULL,
+                                led_pwm_timer_cb);
+    if (led_pwm_timer != NULL)
+    {
+        xTimerStart(led_pwm_timer, 0);
+    }
+#else
     if (ae_toggle_flag)
     {
-        Cy_GPIO_Write(CYBSP_LED_BLUE_PORT, CYBSP_LED_BLUE_PIN, CYBSP_LED_STATE_ON);
+        Cy_GPIO_Write(BLUE_LED_PORT, BLUE_LED_PIN, CYBSP_LED_STATE_ON);
     }
+
+#endif /* PSE84_AI_KIT */    
 }
 
 

@@ -9,6 +9,7 @@ In this example, speech is captured using pulse density modulation (PDM) digital
 The PDM data and AEC reference data (if present) is sent to the AFE middleware which uses AFE components – such as Beam Forming, Noise Suppression, AEC/Echo Suppression, Dereverberation, and High Pass filters – and processes the PDM data. The processed data is then sent back to the PC via UAC. 
 
 This code example has a three project structure: CM33 secure, CM33 non-secure, and CM55 projects. All three projects are programmed to the external QSPI flash and executed in Execute in Place (XIP) mode. Critical codes are executed from SoCMEM and Tightly Coupled Memories (TCM). Extended boot launches the CM33 secure project from a fixed location in the external flash, which then configures the protection settings and launches the CM33 non-secure application. Additionally, CM33 non-secure application enables CM55 CPU and launches the CM55 application.
+> **Note:** On the KIT_PSE84_HMI, all three projects are programmed to the external OSPI flash instead of QSPI.
 
 This code example uses the Peripheral Driver Library (PDL) to interface with peripherals such as PDM-PCM, I2S, and GPIO. The TLV320DAC3100 codec is used for playing audio data sent via I2S to the onboard loudspeaker. USB Audio class is used for sending data to PSOC&trade; Edge MCU and receiving data from it.
 
@@ -39,7 +40,8 @@ This code example uses the Peripheral Driver Library (PDL) to interface with per
 
 - [PSOC&trade; Edge E84 Evaluation Kit](https://www.infineon.com/KIT_PSE84_EVAL) (`KIT_PSE84_EVAL_EPC2`) – Default value of `TARGET`
 - [PSOC&trade; Edge E84 Evaluation Kit](https://www.infineon.com/KIT_PSE84_EVAL) (`KIT_PSE84_EVAL_EPC4`)
-
+- [PSOC&trade; Edge E84 AI Kit](https://www.infineon.com/KIT_PSE84_AI) (`KIT_PSE84_AI`)
+- [PSOC&trade; Edge E84 HMI Kit](https://www.infineon.com/KIT_PSE84_HMI) (`KIT_PSE84_HMI`)
 
 ## Hardware setup
 
@@ -49,6 +51,15 @@ Ensure the following jumper and pin configuration on board.
 - BOOT SW must be in the HIGH/ON position
 - J20 and J21 must be in the tristate/not connected (NC) position for the PSOC&trade; Edge E84 Evaluation Kit
 
+> **Note:** This hardware setup is not required for PSOC&trade; Edge E84 AI Kit (KIT_PSE84_AI). 
+
+For PSOC&trade; Edge E84 AI Kit, external speakers need to be soldered to the pins 24,as shown in below picture
+
+**Figure 1. PSOC&trade; Edge E84 AI Kit pins**
+
+ ![](images/ai_kit_pins.png)
+
+The part number of the recommended speaker for PSOC&trade; Edge E84 AI Kit is CAC45-02W70-06-1 . 
 
 ## Software setup
 
@@ -75,28 +86,28 @@ For example: C:/Program Files/ArmCompilerforEmbedded6.22 <br>
 For example: C:/llvm/LLVM-ET-Arm-19.1.5-Windows-x86_64 <br>
 
 
-## Operation in default mode 
+## Operation in default mode - PSOC&trade; Edge E84 Evaluation Kit
 
 1. The default mode of this code example is *functional* mode. Ensure to set CONFIG_AE_MODE=FUNCTIONAL in common.mk.
 Refer [Using the code example](docs/using_the_code_example.md) and build/flash the firmware to the kit. After flashing, connect an additional USB cable to the 'Device USB' port of the kit
 
-   **Figure 1. USB device connection**
+   **Figure 2. USB device connection**
    
    ![](images/usb_device.png)
 
 2. Observe the PSOC&trade; Edge MCU enumerate as a **Stereo USB Speaker** and **Mono channel USB Mic** on the PC
 
-   **Figure 2. Device enumeration as a USB speaker**
+   **Figure 3. Device enumeration as a USB speaker**
    
    ![](images/audio_device_pc.png)
    
-   **Figure 3. Device enumeration as a USB microphone**
+   **Figure 4. Device enumeration as a USB microphone**
 
    ![](images/audio_speaker_mic.png)
 
 3. Choose **Speakers (Audio Control)** as the audio output device of the PC 
 
-   **Figure 4. Selecting sound output**
+   **Figure 5. Selecting sound output**
    
    ![](images/output_audio.png)
 
@@ -106,7 +117,7 @@ You can also choose not to play anything on the device speaker to evaluate other
 
 5. Launch Audacity and choose the microphone
    
-   **Figure 5. Selecting microphone in Audacity**
+   **Figure 6. Selecting microphone in Audacity**
 
     ![](images/audacity_mic.png)
 
@@ -114,21 +125,29 @@ You can also choose not to play anything on the device speaker to evaluate other
 
 7. Observe the blue LED on the kit. If it is on, it means the AE processed data is received via USB to the PC and the recorded audio will be cleaner
 
-   **Figure 6. Observe the LED on the kit**
+   **Figure 7. Observe the LED on the kit**
    
    ![](images/led.png)
 
-   **Figure 7. Observe AE processed audio**
+   **Figure 8. Observe AE processed audio**
 
    ![](images/clean_audio.png)
 
 8. Press USER_BTN1; if the blue LED is off, then AE unprocessed data is received via USB to the PC. The recorded audio will have background noise captured by the PDM mic along with your speech
 
 
-   **Figure 8. Observe processed and unprocessed data controlled via USER_BTN1**
+   **Figure 9. Observe processed and unprocessed data controlled via USER_BTN1**
 
    ![](images/unprocessed_audio.png)
 
+
+## Operation in default mode - PSOC&trade; Edge E84 AI Kit: 
+
+For PSOC&trade; Edge E84 AI Kit, The operational steps are same as EVK. PSOC&trade; Edge E84 AI kit has only one user button as highlighted in below picture. The following picture shows the ports/LED of the kit. External speakers also have to be connected.
+
+   **Figure 10. PSOC&trade; Edge E84 AI Kit setup**
+
+   ![](images/ai_kit_setup.png)
 
 ## Design guide
 
@@ -167,6 +186,7 @@ Document title: *CE241960* - *PSOC&trade; Edge MCU: DEEPCRAFT&trade; Audio Enhan
  2.0.1   | Fix asset dependencies to latest tag for github release and sync to latest BSP & AFE. PDM mics with 24bit word size and Software gain
  2.0.2   | Added Automatic Gain Control (AGC) that can be configured at compile-time. AFE algorithm improvements for AEC/ES to have lower MCPS.
  2.1.0   | Updated design files to fix ModusToolbox&trade; v3.7 build warnings. <br> Upgraded audio voice core asset to version 3.x and optimizations for audio playback
+ 2.2.0   | Added support for PSOC&trade; Edge E84 AI Kit and  PSOC&trade; Edge E84 HMI Kit
 <br>
 
 

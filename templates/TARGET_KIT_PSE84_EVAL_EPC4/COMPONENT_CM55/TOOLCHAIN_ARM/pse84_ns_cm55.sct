@@ -22,7 +22,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright (c) (2020-2026), Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright (c) (2025-2026), Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.
 * SPDX-License-Identifier: Apache-2.0
 *
@@ -127,7 +127,7 @@ LR_XIP_PORT0 (CYMEM_CM55_0_m55_nvm_sel_START + MCUBOOT_HEADER_SIZE) (CYMEM_CM55_
     *mtb_tlv320dac3100* (+RO)
     *app_logger* (+RO)
     *user_interaction* (+RO)
-    *button_press* (+RO)
+    *user_button* (+RO)
     *profiler* (+RO)
     *app_afe_tuner* (+RO)
     *cy_retarget_io* (+RO)
@@ -150,8 +150,6 @@ LR_XIP_PORT0 (CYMEM_CM55_0_m55_nvm_sel_START + MCUBOOT_HEADER_SIZE) (CYMEM_CM55_
     *ifx_sp_enh_process* (+RO)
     *supportFunctions* (+RO)
     
-    *button_press* (+RO)
-
     *cyhal_uart* (+RO)
 
     *cyhal_i2s* (+RO)

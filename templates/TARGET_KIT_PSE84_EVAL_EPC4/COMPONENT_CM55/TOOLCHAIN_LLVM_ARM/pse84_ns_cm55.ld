@@ -163,7 +163,7 @@ SECTIONS
         *mtb_tlv320dac3100.*
         *app_logger.*
         *user_interaction.*
-        *button_press.*
+        *user_button.*
         *profiler.*
         *app_afe_tuner.*
         *cy_retarget_io.*
@@ -185,8 +185,6 @@ SECTIONS
         *ifx_sp_enh.*
         *ifx_sp_enh_process.*
         *supportFunctions.*
-
-        *button_press.*
 
         *cyhal_uart.*
 
@@ -309,7 +307,7 @@ SECTIONS
         *mtb_tlv320dac3100.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
         *app_logger.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
         *user_interaction.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
-        *button_press.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
+        *user_button.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
         *profiler.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
         *app_afe_tuner.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
         *cy_retarget_io.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)

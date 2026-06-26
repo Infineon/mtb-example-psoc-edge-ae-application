@@ -304,8 +304,8 @@ cy_rslt_t ae_free_memory(cy_afe_mem_id_t mem_id, void *buffer)
 *
 *******************************************************************************/
 static cy_rslt_t ae_tuner_notify_callback(cy_afe_t handle, 
-                                          cy_afe_config_setting_t *config_setting, 
-                                          void *user_arg)
+                                        cy_afe_config_setting_t *config_setting, 
+                                        void *user_arg)
 {
     (void) user_arg;
 
@@ -355,8 +355,8 @@ static cy_rslt_t ae_tuner_read_callback(cy_afe_t handle,
 *
 *******************************************************************************/
 static cy_rslt_t ae_tuner_write_callback(cy_afe_t handle, 
-                                         cy_afe_tuner_buffer_t *response_buffer, 
-                                         void *user_arg)
+                                        cy_afe_tuner_buffer_t *response_buffer, 
+                                        void *user_arg)
 {
     return audio_enhancement_tuner_write(response_buffer);
 
@@ -365,20 +365,20 @@ static cy_rslt_t ae_tuner_write_callback(cy_afe_t handle,
 #endif
 
 /*******************************************************************************
- * Function Name: audio_enhancement_init
- *******************************************************************************
- * Summary:
- * Initializes the audio enhacement module. Internally, it instantiates the
- * audio-front-end middleware and create an internal task to process the 
- * audio data.
- *
- * Parameters:
- *  void
- *
- * Return:
- *  Returns AE_RSLT_SUCCESS if successful, otherwise returns an error code.
- *
- *******************************************************************************/
+* Function Name: audio_enhancement_init
+*******************************************************************************
+* Summary:
+* Initializes the audio enhacement module. Internally, it instantiates the
+* audio-front-end middleware and create an internal task to process the 
+* audio data.
+*
+* Parameters:
+*  void
+*
+* Return:
+*  Returns AE_RSLT_SUCCESS if successful, otherwise returns an error code.
+*
+*******************************************************************************/
 ae_rslt_t audio_enhancement_init(uint8_t num_channels)
 {
     cy_rslt_t result = CY_RSLT_SUCCESS;
@@ -430,19 +430,19 @@ ae_rslt_t audio_enhancement_init(uint8_t num_channels)
 }
 
 /*******************************************************************************
- * Function Name: audio_enhancement_feed_input
- *******************************************************************************
- * Summary:
- * Feeds the input audio data to the audio enhancement module.
- *
- * Parameters:
- *  input_buffer: pointer to the input audio data buffer.
- *  aec_buffer: pointer to the AEC reference buffer. If not used, set to NULL.
- *
- * Return:
- *  Returns AE_RSLT_SUCCESS if successful, otherwise returns an error code.
- *
- *******************************************************************************/
+* Function Name: audio_enhancement_feed_input
+*******************************************************************************
+* Summary:
+* Feeds the input audio data to the audio enhancement module.
+*
+* Parameters:
+*  input_buffer: pointer to the input audio data buffer.
+*  aec_buffer: pointer to the AEC reference buffer. If not used, set to NULL.
+*
+* Return:
+*  Returns AE_RSLT_SUCCESS if successful, otherwise returns an error code.
+*
+*******************************************************************************/
 ae_rslt_t audio_enhancement_feed_input(int16_t *input_buffer, int16_t *aec_buffer)
 {
     cy_rslt_t result = CY_RSLT_SUCCESS;
@@ -463,18 +463,18 @@ ae_rslt_t audio_enhancement_feed_input(int16_t *input_buffer, int16_t *aec_buffe
 }
 
 /*******************************************************************************
- * Function Name: audio_enhancement_process_output
- *******************************************************************************
- * Summary:
- * Weak implementation to process the audio enhancement output.
- *
- * Parameters:
- *  output_buffer: pointer to the output audio data buffer.
- *
- * Return:
- *  void
- *
- *******************************************************************************/
+* Function Name: audio_enhancement_process_output
+*******************************************************************************
+* Summary:
+* Weak implementation to process the audio enhancement output.
+*
+* Parameters:
+*  output_buffer: pointer to the output audio data buffer.
+*
+* Return:
+*  void
+*
+*******************************************************************************/
 __attribute__((weak)) void audio_enhancement_process_output(ae_buffer_info_t *output_buffer)
 {
     return;

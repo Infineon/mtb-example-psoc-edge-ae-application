@@ -192,10 +192,21 @@ else
     DEFINES+=AE_TUNING_MODE
 endif
 
+
+ifeq ($(TARGET),APP_KIT_PSE84_AI)
+	DEFINES+=PSE84_AI_KIT
+endif
+
 #TLV Codec related settings
 #Choose between Headphone and on-board speaker
 #USE_HEADPHONE/USE_SPEAKER
-DEFINES+=USE_SPEAKER
+
+ifeq ($(TARGET),APP_KIT_PSE84_AI)
+	DEFINES+=USE_SPEAKER
+else
+	DEFINES+=USE_SPEAKER
+endif
+
 #Set processing block to 0x10 for 16kHz playback
 DEFINES+=TLV320DAC3100_PROCESSING_BLOCK=0x10
 

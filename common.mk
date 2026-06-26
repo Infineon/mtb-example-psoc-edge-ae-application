@@ -72,7 +72,7 @@ CONFIG=Release
 CONFIG_VOICE_CORE_MODE=LIMITED
 
 #########################################################################################
-##################### AFE Mode ##########################################################
+##################### AE Mode ###########################################################
 
 # AE mode : 
 # FUNCTIONAL    - Demonstrates Audio Enhancement processing with single USB channel to PC.

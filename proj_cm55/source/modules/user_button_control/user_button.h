@@ -1,10 +1,10 @@
 /******************************************************************************
-* File Name : button_press.h
+* File Name : user_button.h
 *
 * Description :
-* Header file for controlling user button.
+* Header file for user button handling
 ********************************************************************************
-* (c) 2025-2026, Infineon Technologies AG, or an affiliate of Infineon
+* (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
 * Technologies AG. All rights reserved.
 * This software, associated documentation and materials ("Software") is
 * owned by Infineon Technologies AG or one of its affiliates ("Infineon")
@@ -33,20 +33,29 @@
 * thereof can reasonably be expected to result in personal injury.
 *******************************************************************************/
 
-#ifndef __BUTTON_PRESS_H__
-#define __BUTTON_PRESS_H__
+#ifndef _USER_BUTTON_H_
+#define _USER_BUTTON_H_
 
 #if defined(__cplusplus)
 extern "C" {
 #endif /* __cplusplus */
 
+#include "cybsp.h"
 #include "user_interaction.h"
+/*******************************************************************************
+ * Function Prototypes
+ *******************************************************************************/
+
 
 void user_button_init(cb_user_action user_action_cb);
+void user_button_task(void*);
+void process_user_button();
+
 
 #if defined(__cplusplus)
 }
 #endif /* __cplusplus */
 
-#endif /* __BUTTON_PRESS_H__ */
+#endif /* _USER_BUTTON_H_ */
+
 /* [] END OF FILE */

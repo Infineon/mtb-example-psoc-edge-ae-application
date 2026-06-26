@@ -40,6 +40,35 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#include "cycfg_pins.h"
+#include "cybsp_types.h"
+#include "FreeRTOS.h"
+#include "timers.h"
+
+/*******************************************************************************
+* Macros
+*******************************************************************************/
+#ifdef PSE84_AI_KIT
+#define BLUE_LED_PORT          CYBSP_LED_RGB_BLUE_PORT
+#define BLUE_LED_PIN           CYBSP_LED_RGB_BLUE_PIN
+
+/* LED PWM duty cycle: ON ticks out of LED_PWM_PERIOD_MS total.
+ * Adjust LED_PWM_ON_MS to control brightness (lower = dimmer).
+ * Example: 2 ON out of 10 period = 20% brightness. */
+#define LED_PWM_PERIOD_MS      (10U)
+#define LED_PWM_ON_MS          (2U)
+
+#else
+#define BLUE_LED_PORT          CYBSP_LED_BLUE_PORT
+#define BLUE_LED_PIN           CYBSP_LED_BLUE_PIN
+#endif /* PSE84_AI_KIT */
+
+
+
+/*******************************************************************************
+ * Function Prototypes
+ *******************************************************************************/
+
 void ae_application();
 void led_init_hp();
 
