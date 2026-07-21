@@ -67,7 +67,16 @@ extern "C" {
 
 #define I2S_HW_FIFO_SIZE                  (128u)
 
+/* Speaker volume: value written to the DAC digital volume register
+ * (two's-complement, 0x00 = 0 dB). 110 | 0x80 = 0xEE ~= -9 dB. */
 #define I2S_TLV_CODEC_VOLUME              (110)
+
+/* Headphone volume: value written to the analog HP routing volume register
+ * where 0 = 0 dB and larger values = more attenuation (127 ~= mute). This
+ * register uses the opposite encoding from the speaker DAC volume register,
+ * so it must NOT reuse I2S_TLV_CODEC_VOLUME (which would nearly mute the HP).
+ * Step 18 matches the codec driver's default analog HP level. */
+#define I2S_TLV_HP_CODEC_VOLUME           (5)
 
 #define I2S_ISR_PRIORITY                  (2)
 

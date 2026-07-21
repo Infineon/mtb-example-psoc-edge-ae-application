@@ -106,7 +106,7 @@ static void led_pwm_timer_cb(TimerHandle_t xTimer)
     }
 
     if (ae_toggle_flag)
-    {    
+    {
         if (led_pwm_counter < LED_PWM_ON_MS)
         {
             Cy_GPIO_Write(BLUE_LED_PORT, BLUE_LED_PIN, CYBSP_LED_STATE_ON);
@@ -216,7 +216,7 @@ void ae_application()
 
 void led_init_hp()
 {
-#ifdef PSE84_AI_KIT	
+#ifdef PSE84_AI_KIT
 
 /* Control the brightness of AI kit LED */
 /* Create a 1 ms periodic software timer for LED PWM */
@@ -235,7 +235,7 @@ void led_init_hp()
         Cy_GPIO_Write(BLUE_LED_PORT, BLUE_LED_PIN, CYBSP_LED_STATE_ON);
     }
 
-#endif /* PSE84_AI_KIT */    
+#endif /* PSE84_AI_KIT */
 }
 
 

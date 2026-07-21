@@ -2,11 +2,11 @@
 
 This code example demonstrates how to process audio data using Infineon's DEEPCRAFT&trade; Audio Enhancement (AE) solution, which includes a suite of audio processing algorithms useful for voice and audio applications on Infineon's PSOC&trade; Edge MCU. It executes from Arm&reg; Cortex&reg; M55 core.
 
-DEEPCRAFT&trade; Audio Enhancement includes the Audio Enhancement application, Audio front end (AFE) middleware that interfaces to audio-voice-core algorithms via AFE components and AFE Configurator for tuning. 
+DEEPCRAFT&trade; Audio Enhancement includes the Audio Enhancement application, Audio front end (AFE) middleware that interfaces to audio-voice-core algorithms via AFE components and AFE Configurator for tuning.
 
 In this example, speech is captured using pulse density modulation (PDM) digital microphones on the PSOC&trade; Edge MCU kit. Audio data is streamed over USB Audio Class (UAC) from the PC to the kit and played back on the onboard speaker via I2S. This streamed data is also used as the acoustic echo cancellation (AEC) reference by the AFE middleware. When there is no data streamed to the kit via USB, AFE middleware executes other AFE components – that are enabled or disabled via the AFE Configurator apart from AEC.
 
-The PDM data and AEC reference data (if present) is sent to the AFE middleware which uses AFE components – such as Beam Forming, Noise Suppression, AEC/Echo Suppression, Dereverberation, and High Pass filters – and processes the PDM data. The processed data is then sent back to the PC via UAC. 
+The PDM data and AEC reference data (if present) is sent to the AFE middleware which uses AFE components – such as Beam Forming, Noise Suppression, AEC/Echo Suppression, Dereverberation, and High Pass filters – and processes the PDM data. The processed data is then sent back to the PC via UAC.
 
 This code example has a three project structure: CM33 secure, CM33 non-secure, and CM55 projects. All three projects are programmed to the external QSPI flash and executed in Execute in Place (XIP) mode. Critical codes are executed from SoCMEM and Tightly Coupled Memories (TCM). Extended boot launches the CM33 secure project from a fixed location in the external flash, which then configures the protection settings and launches the CM33 non-secure application. Additionally, CM33 non-secure application enables CM55 CPU and launches the CM55 application.
 > **Note:** On the KIT_PSE84_HMI, all three projects are programmed to the external OSPI flash instead of QSPI.
@@ -51,7 +51,7 @@ Ensure the following jumper and pin configuration on board.
 - BOOT SW must be in the HIGH/ON position
 - J20 and J21 must be in the tristate/not connected (NC) position for the PSOC&trade; Edge E84 Evaluation Kit
 
-> **Note:** This hardware setup is not required for PSOC&trade; Edge E84 AI Kit (KIT_PSE84_AI). 
+> **Note:** This hardware setup is not required for PSOC&trade; Edge E84 AI Kit (KIT_PSE84_AI).
 
 For PSOC&trade; Edge E84 AI Kit, external speakers need to be soldered to the pins 24,as shown in below picture
 
@@ -59,7 +59,7 @@ For PSOC&trade; Edge E84 AI Kit, external speakers need to be soldered to the pi
 
  ![](images/ai_kit_pins.png)
 
-The part number of the recommended speaker for PSOC&trade; Edge E84 AI Kit is CAC45-02W70-06-1 . 
+The part number of the recommended speaker for PSOC&trade; Edge E84 AI Kit is CAC45-02W70-06-1 .
 
 ## Software setup
 
@@ -92,23 +92,23 @@ For example: C:/llvm/LLVM-ET-Arm-19.1.5-Windows-x86_64 <br>
 Refer [Using the code example](docs/using_the_code_example.md) and build/flash the firmware to the kit. After flashing, connect an additional USB cable to the 'Device USB' port of the kit
 
    **Figure 2. USB device connection**
-   
+
    ![](images/usb_device.png)
 
 2. Observe the PSOC&trade; Edge MCU enumerate as a **Stereo USB Speaker** and **Mono channel USB Mic** on the PC
 
    **Figure 3. Device enumeration as a USB speaker**
-   
+
    ![](images/audio_device_pc.png)
-   
+
    **Figure 4. Device enumeration as a USB microphone**
 
    ![](images/audio_speaker_mic.png)
 
-3. Choose **Speakers (Audio Control)** as the audio output device of the PC 
+3. Choose **Speakers (Audio Control)** as the audio output device of the PC
 
    **Figure 5. Selecting sound output**
-   
+
    ![](images/output_audio.png)
 
 4. Play any music or speech audio from local files or the Internet. The code also includes a default test stream located at *ae_test_stream/ae_test_stream.wav* which can be played via the Media Player or Audacity tool. <br>
@@ -116,7 +116,7 @@ The streamed audio will be output via the PSOC&trade; Edge MCU on-board speaker.
 You can also choose not to play anything on the device speaker to evaluate other algorithms such as Noise Suppression or Beam Forming
 
 5. Launch Audacity and choose the microphone
-   
+
    **Figure 6. Selecting microphone in Audacity**
 
     ![](images/audacity_mic.png)
@@ -126,7 +126,7 @@ You can also choose not to play anything on the device speaker to evaluate other
 7. Observe the blue LED on the kit. If it is on, it means the AE processed data is received via USB to the PC and the recorded audio will be cleaner
 
    **Figure 7. Observe the LED on the kit**
-   
+
    ![](images/led.png)
 
    **Figure 8. Observe AE processed audio**
@@ -141,7 +141,7 @@ You can also choose not to play anything on the device speaker to evaluate other
    ![](images/unprocessed_audio.png)
 
 
-## Operation in default mode - PSOC&trade; Edge E84 AI Kit: 
+## Operation in default mode - PSOC&trade; Edge E84 AI Kit:
 
 For PSOC&trade; Edge E84 AI Kit, The operational steps are same as EVK. PSOC&trade; Edge E84 AI kit has only one user button as highlighted in below picture. The following picture shows the ports/LED of the kit. External speakers also have to be connected.
 
@@ -187,6 +187,7 @@ Document title: *CE241960* - *PSOC&trade; Edge MCU: DEEPCRAFT&trade; Audio Enhan
  2.0.2   | Added Automatic Gain Control (AGC) that can be configured at compile-time. AFE algorithm improvements for AEC/ES to have lower MCPS.
  2.1.0   | Updated design files to fix ModusToolbox&trade; v3.7 build warnings. <br> Upgraded audio voice core asset to version 3.x and optimizations for audio playback
  2.2.0   | Added support for PSOC&trade; Edge E84 AI Kit and  PSOC&trade; Edge E84 HMI Kit
+ 2.3.0   | Added support for custom DSNS model
 <br>
 
 

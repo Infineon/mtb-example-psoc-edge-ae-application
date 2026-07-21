@@ -74,7 +74,6 @@ INCLUDES+=
 # Add additional defines to the build process (without a leading -D).
 DEFINES+=CY_RETARGET_IO_CONVERT_LF_TO_CRLF
 
-# Select softfp or hardfp floating point. Default is softfp.
 VFP_SELECT+=
 
 # Additional / custom C compiler flags.
@@ -112,7 +111,7 @@ PREBUILD=
 ################################################################################
 
 #Application Logger
-COMPONENTS += APP_LOGGER 
+COMPONENTS += APP_LOGGER
 
 ################################################################################
 # Paths
@@ -125,9 +124,9 @@ CY_APP_PATH=
 
 # Relative path to the shared repo location.
 #
-# All .mtb files have the format, <URI>#<COMMIT>#<LOCATION>. If the <LOCATION> field 
-# begins with $$ASSET_REPO$$, then the repo is deposited in the path specified by 
-# the CY_GETLIBS_SHARED_PATH variable. The default location is one directory level 
+# All .mtb files have the format, <URI>#<COMMIT>#<LOCATION>. If the <LOCATION> field
+# begins with $$ASSET_REPO$$, then the repo is deposited in the path specified by
+# the CY_GETLIBS_SHARED_PATH variable. The default location is one directory level
 # above the current app directory.
 # This is used with CY_GETLIBS_SHARED_NAME variable, which specifies the directory name.
 CY_GETLIBS_SHARED_PATH=../..

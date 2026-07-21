@@ -42,7 +42,7 @@
 *******************************************************************************/
 mtb_hal_i2c_t MW_I2C_hal_obj;
 cy_stc_scb_i2c_context_t MW_I2C_context;
-mtb_hal_i2c_cfg_t i2c_config = 
+mtb_hal_i2c_cfg_t i2c_config =
 {
     .is_target = false,
     .address = I2C_ADDRESS,
@@ -93,7 +93,7 @@ void app_i2s_init(void)
 /*******************************************************************************
  * Function Name: app_tlv_codec_init
  ********************************************************************************
-* Summary: Initializes the I2C and TLV codec. 
+* Summary: Initializes the I2C and TLV codec.
 *
 * Parameters:
 *  None
@@ -112,13 +112,13 @@ void app_tlv_codec_init(void)
     /* Configure internal clock dividers to achieve desired sample rate */
 #ifdef USE_SPEAKER
     mtb_tlv320dac3100_configure_clocking(MCLK_HZ, SAMPLE_RATE_HZ, I2S_WORD_LENGTH,TLV320DAC3100_SPK_AUDIO_OUTPUT);
+    mtb_tlv320dac3100_adjust_speaker_output_volume(I2S_TLV_CODEC_VOLUME);
 #endif /* USE_SPEAKER*/
 
 #ifdef USE_HEADPHONE
     mtb_tlv320dac3100_configure_clocking(MCLK_HZ, SAMPLE_RATE_HZ, I2S_WORD_LENGTH,TLV320DAC3100_HP_AUDIO_OUTPUT);
+    mtb_tlv320dac3100_adjust_headphone_output_volume(I2S_TLV_HP_CODEC_VOLUME);
 #endif /* USE_HEADPHONE */
-
-    mtb_tlv320dac3100_adjust_speaker_output_volume(I2S_TLV_CODEC_VOLUME);
 
     /* Activate TLV320DAC3100 */
     mtb_tlv320dac3100_activate();

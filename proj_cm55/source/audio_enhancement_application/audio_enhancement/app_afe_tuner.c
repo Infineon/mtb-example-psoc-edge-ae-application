@@ -98,7 +98,7 @@ cy_rslt_t audio_enhancement_tuner_notify(cy_afe_t handle, cy_afe_config_setting_
         if(CY_AFE_CONFIG_INPUT_GAIN == config_setting->config_name)
         {
             data = (int*) config_setting->value;
-        
+
             *data = stored_input_gain;
 
            if (stored_input_gain==0 && gain_change==0)
@@ -106,7 +106,7 @@ cy_rslt_t audio_enhancement_tuner_notify(cy_afe_t handle, cy_afe_config_setting_
                 *data=AFE_MIC_INPUT_GAIN_DB*2;
                 stored_input_gain=*data;
            }
-           app_ae_log("Final gain value read is %d \r\n",*data); 
+           app_ae_log("Final gain value read is %d \r\n",*data);
         }
     }
     else if (CY_AFE_UPDATE_CONFIG == config_setting->action)
@@ -118,11 +118,11 @@ cy_rslt_t audio_enhancement_tuner_notify(cy_afe_t handle, cy_afe_config_setting_
 
             app_ae_log("Update input gain config. Input gain from AFE configurator : %d", *data);
             gain_db=*data/2;
-#ifdef GAIN_CONTROL_ON  
+#ifdef GAIN_CONTROL_ON
             if (gain_db>=AFE_MIN_MIC_INPUT_HW_GAIN && gain_db<=AFE_MAX_MIC_INPUT_HW_GAIN)
-#else                     
+#else
             if (gain_db>=PDM_PCM_MIN_GAIN && gain_db<=PDM_PCM_MAX_GAIN)
-#endif /* GAIN_CONTROL_ON */            
+#endif /* GAIN_CONTROL_ON */
             {
                 app_ae_log("Setting input gain to %f \r\n",gain_db);
                 input_gain_factor=convert_db_to_pdm_scale(gain_db);
@@ -135,12 +135,12 @@ cy_rslt_t audio_enhancement_tuner_notify(cy_afe_t handle, cy_afe_config_setting_
                 app_log_print("PDM Gain out of bounds \r\n");
                 response_buffer.buffer=(uint8_t*)pdm_error;
                 response_buffer.length=strlen(pdm_error);
-                
+
 
                 return CY_RSLT_AFE_TUNER_HW_INPUT_GAIN_OUT_OF_RANGE;
-            
+
             }
-             
+
         }
         else if(CY_AFE_CONFIG_STREAM == config_setting->config_name)
         {
@@ -178,10 +178,10 @@ cy_rslt_t audio_enhancement_tuner_notify(cy_afe_t handle, cy_afe_config_setting_
             if (pbulk_delay!=NULL)
             {
                 app_ae_log("App: Bulk delay calculation stopped \r\n");
+                app_ae_log("App: Bulk delay calculation stopped: BD: %d ms\r\n",(int)*pbulk_delay);
             }
-            app_ae_log("App: Bulk delay calculation stopped: BD: %d ms\r\n",(int)*data);
         }
-     
+
     }
 
     return AE_RSLT_SUCCESS;

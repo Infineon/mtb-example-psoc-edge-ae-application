@@ -43,23 +43,23 @@ You can visualize the data using Audacity and play back the received audio data 
 
 The AFE Configurator tool lets you choose and customize the AFE components that run on PSOC&trade; Edge.
 
-The AFE Configurator tool requires the AFE Configurator project file provided in the code example. It is available in: 
+The AFE Configurator tool requires the AFE Configurator project file provided in the code example. It is available in:
 *proj_cm55\source\audio_enhancement_application\audio_enhancement\ae_configuration.mtbafe*.
 
-To open this project file: 
+To open this project file:
 
   - Open *ae_configuration.mtbafe* using the AFE Configurator tool via Eclipse IDE
-  
+
     or,
 
   - Click **Audio FE Configurator** under **proj_cm55** in Eclipse IDE
-  
+
     or,
-    
+
   - In case if not using Eclipse IDE, open the proj_cm55 folder in the modus-shell and run "make audio-fe-configurator"
-   
+
     or,
-    
+
   - Open the *ae_configuration.mtbafe* via audio-fe-configurator.exe located in `C:\Users\[username]\Infineon\Tools\DEEPCRAFT-Audio-Enhancement-Tech-Pack\tools\audio-fe-configurator`
 
 The PDM mic mode is controlled by the AFE Configurator. To choose between mono or stereo input, choose the options as:
@@ -67,7 +67,7 @@ The PDM mic mode is controlled by the AFE Configurator. To choose between mono o
 **Figure 3. Choosing input in AFE Configurator**
 
 ![](../images/afe_pdm_mic.png)
-    
+
 If you select the **USB Audio Out**, the PDM mic will not be enabled. You can stream audio via USB for benchmarking and evaluation of AFE middleware but the streamed audio will not be played on the device speaker. In **USB Audio Out** mode – it is always stereo input.
 
 The AFE Configurator generates *cy_afe_configurator_settings.c* and *cy_afe_configurator_settings.h* files when saving the project. These files contain the AFE filter settings and other options such as the components enabled.
@@ -76,7 +76,7 @@ The AFE relies on statically compiled files for this operation. The GeneratedSou
 
 The generated files are available at *proj_cm55\source\audio_enhancement_application\audio_enhancement\GeneratedSource*
 
-A limited set of parameters can be set dynamically from AFE Configurator. To send the parameters to the PSOC&trade; Edge MCU: 
+A limited set of parameters can be set dynamically from AFE Configurator. To send the parameters to the PSOC&trade; Edge MCU:
 
 1. Close Tera Term or any other UART Terminal windows on the PC
 
@@ -99,11 +99,11 @@ A limited set of parameters can be set dynamically from AFE Configurator. To sen
     **Figure 6. Dynamically configurable parameters**
 
     ![](../images/afe_dynamic_values.png)
-  
+
     For example, to disable **Noise Suppression**, unselect **Noise Suppression** and then **Sync filter settings** > **Load to device**
 
     **Figure 7. Disabling a parameter**
-    
+
     ![](../images/dynamic_configuration.png)
 
 5. Check the processed audio recorded via Audacity while the LED is Blue. Noise suppression should be disabled and the processed audio should have background noise
@@ -116,7 +116,7 @@ The example also supports debugging or tuning the AFE via USB. In tuning mode, P
 1. Choose the 4 individual channels to debug using the AFE Configurator:
 
     **Figure 8. Choosing channels to debug**
-    
+
     ![](../images/afe_configurator_usb.png)
 
 2. After choosing the required data to be streamed back from PSOC&trade; Edge MCU to PC, save the AFE project
@@ -125,14 +125,14 @@ The example also supports debugging or tuning the AFE via USB. In tuning mode, P
 
 4. Build and flash the code
 
-5. Incase if playback of audio is required on the kit speaker ( for eg) Acoustic Echo Cancellation tuning), Play any audio to the kit (from Internet streaming sites, media player on the PC by choosing Speakers(Audio Control))
+5. In case if playback of audio is required on the kit speaker ( for eg) Acoustic Echo Cancellation tuning), Play any audio to the kit (from Internet streaming sites, media player on the PC by choosing Speakers(Audio Control))
 
 6. To view the 4 channels, you can either use Audacity or the AFE Configurator:
 
-    - In **Audacity**, set the driver to WASAPI and set the channels to 4 by chosing (Audio Control)Microphone, Ensure to set the sampling rate to 16kHz and other settings as shown in below picture
+    - In **Audacity**, set the driver to WASAPI and set the channels to 4 by choosing (Audio Control)Microphone, Ensure to set the sampling rate to 16kHz and other settings as shown in below picture
 
       **Figure 9. Audacity: audio settings**
-    
+
       ![](../images/audacity_driver.png)
 
       This enables viewing the quad channel output to debug AFE
@@ -144,22 +144,22 @@ The example also supports debugging or tuning the AFE via USB. In tuning mode, P
     - To view using **AFE Configurator**, ensure to connect AFE Configurator to the device <br>
 
       1. Select the play icon and record for some time
-      
+
           **Figure 11. AFE Configurator: Play icon**
           ![](../images/afe_usb_play_button.png)
 
       2. Press the stop button
-      
+
           **Figure 12. AFE Configurator: Stop icon**
           ![](../images/afe_usb_stop_button.png)
- 
+
           AFE Configurator displays the 4 channels:
-          
+
           **Figure 13. Viewing the quad channel output on AFE Configurator**
           ![](../images/afe_quad_channel_display.png)
- 
+
       3. Press Stop and save the quad channel audio using the save recording icon
-      
+
           **Figure 14. AFE Configurator: Save recording**
           ![](../images/afe_save_recording.png)
 
@@ -167,9 +167,9 @@ The example also supports debugging or tuning the AFE via USB. In tuning mode, P
 
 7. Any audio played to Speakers(Audio Control) via PC (media player, Internet streaming etc) will be played on the kit's speaker when Input Source is set to "Microphones" in AFE Configurator
 
-8. AFE Configurator also provides an option to play audio on the kit speaker 
+8. AFE Configurator also provides an option to play audio on the kit speaker
 
-9. Incase if AFE Configuator is to be used for audio playback, ensure to load the required file to be played back with File->Load WAV Files... option and select "Target Speaker" checkbox. This operation requies reflashing the kit, so save the configuration, build and flash to the kit <br>
+9. In case if AFE Configurator is to be used for audio playback, ensure to load the required file to be played back with File->Load WAV Files... option and select "Target Speaker" checkbox. This operation requires reflashing the kit, so save the configuration, build and flash to the kit <br>
 
     **Figure 15. AFE Configurator: Load WAV file**
 
@@ -178,7 +178,7 @@ The example also supports debugging or tuning the AFE via USB. In tuning mode, P
     **Figure 16. AFE Configurator: Select Target Speaker**
     ![](../images/afe_target_speaker.png)
 
-10. Select play button to playback the audio on the kit while simultaneously recording from the kit on the AFE Configuarator
+10. Select play button to playback the audio on the kit while simultaneously recording from the kit on the AFE Configurator
 
 11. Stop recording and use Audacity to import the file for further analysis
 
@@ -188,49 +188,107 @@ To view the AFE-processed data, you can use either Audacity or AFE Configurator,
 
 However, with Audacity and AFE Configurator, only the data stream can be viewed in real time, but not the spectrogram view. Spectrogram can be viewed after finishing the recording.
 
-For real-time preview of spectrogram, the code example includes a DEEPCRAFT&trade; Studio project. It is located at the 
+For real-time preview of spectrogram, the code example includes a DEEPCRAFT&trade; Studio project. It is located at the
 *data_viewer* folder.
 
-1. This project displays 2 channel audio, so apply the following configurations via AFE Configurator: 
+1. This project displays 2 channel audio, so apply the following configurations via AFE Configurator:
 
     - Channel 0: Input[0]
     - Channel 1: Output
 
-    **Figure 17. Configuring for the spectogram viewer**
-    
-    ![](../images/spectrogram_viewer_settings.png) 
+    **Figure 17. Configuring for the spectrogram viewer**
+
+    ![](../images/spectrogram_viewer_settings.png)
 
     Save the configuration, and build and flash the settings to the kit
 
 2. Open DEEPCRAFT&trade; Studio
 
     **Figure 18. DEEPCRAFT&trade; studio: Launch screen**
-    ![](../images/deepcraft_studio_new.png) 
+    ![](../images/deepcraft_studio_new.png)
 
 2. Open the *data_viewer* folder located in the code example's root directory
 
     **Figure 19. DEEPCRAFT&trade; studio: Opening a project**
-    ![](../images/deepcraft_studio_open.png) 
- 
+    ![](../images/deepcraft_studio_open.png)
+
 3. Click on *Main.imunit* to view the project graph
 
     **Figure 20. DEEPCRAFT&trade; studio: View project graph**
-    ![](../images/deepcraft_studio_project.png) 
+    ![](../images/deepcraft_studio_project.png)
 
 4. Click the play icon to start project compilation
 
     **Figure 21. DEEPCRAFT&trade; studio: Start/Play icon**
-    ![](../images/deepcraft_studio_compilation.png) 
+    ![](../images/deepcraft_studio_compilation.png)
 
     In the live session (live.imsession), you can view the required data according to your preferences. For example, in the following figure, only spectrograms are enabled for viewing and the raw data is masked as highlighted:
 
     **Figure 22. DEEPCRAFT&trade; studio: Customized visualization**
-    ![](../images/deepcraft_studio_view.png) 
+    ![](../images/deepcraft_studio_view.png)
 
 5. Click Record to view the real-time view of spectrograms
 
-    **Figure 23. DEEPCRAFT&trade; studio: Real-time view of spectograms**
-    ![](../images/deepcraft_studio_spectrogram.png) 
+    **Figure 23. DEEPCRAFT&trade; studio: Real-time view of spectrograms**
+    ![](../images/deepcraft_studio_spectrogram.png)
+
+## Bring your own DSNS model
+
+Infineon provides a training framework for users to train their own DSNS model. The training framework will be available soon.
+Users can bring their own DSNS model and deploy it on the code example using the **DEEPCRAFT&trade; Model Converter**.
+
+Follow the steps below to use your own DSNS model:
+
+1. Open the **DEEPCRAFT&trade; Model Converter** and configure the **Code Generation** tab:
+
+    a. Under **General**, select **PSOC Edge M55 with U55** as the Target Device.
+
+    b. Enable the **"Model is RNN"** option
+
+    c. Under **Input Model**, provide the path to your custom Keras ( **.keras* / **.h5*) model file
+
+    d. Under **Output File Name**, enter **"DSNS_LSTM"**
+
+    e. For **Output Directory**, ensure to select the following path: *proj_cm55/source/audio_enhancement_application/audio_enhancement/COMPONENT_CUSTOM_DSNS/*
+
+    > **Note:** If a different path is used, CE will not be able to build with the new model. Ensure to place the deployment files inside COMPONENT_CUSTOM_DSNS folder on proj_cm55. If a different folder is used, change the proj_cm55/Makefile accordingly.
+
+
+    **Figure 24. DEEPCRAFT&trade; Model Converter: General settings**
+
+    ![](../images/model_converter_general_settings.png)
+
+2. Configure the **Optimization Settings**:
+
+    a. Enable **Network Quantization**
+
+    b. Select **"int16x8"** from the **Quantization Type** drop-down.
+
+    c. Under **Calibration Data Type**, choose the appropriate calibration data type depending on the format of calibration data else choose random.
+
+    **Figure 25. DEEPCRAFT&trade; Model Converter: Optimization settings**
+
+    ![](../images/model_converter_optimization.png)
+
+3. Configure the **Advanced Options**:
+
+    a. Under **Advanced Options**, select **"ml-middleware API"** from the **Target API** drop-down
+
+    b. Ensure that all the configurations under **"Ethos U Options"** match those shown in the figure below
+
+    c. Enable the **Force Python Backend** option
+
+    **Figure 26. DEEPCRAFT&trade; Model Converter: Advanced options**
+
+    ![](../images/model_converter_advanced_options.png)
+
+4. To switch to this custom model, update the `CONFIG_DSNS_MODEL` variable in the *proj_cm55/Makefile* as follows:
+
+    ```
+    CONFIG_DSNS_MODEL=CUSTOM_DSNS
+    ```
+
+5. Build and flash the application.
 
 
 ## Automatic Gain Control (AGC)
@@ -254,19 +312,19 @@ If AGC is enabled in *functional* mode, the output will have AGC applied to it. 
 
 If AGC is enabled in *debug* mode, the quad channel USB audio to PC will have the following data,
 
-**Figure 24. Quad Channel USB data with AGC off/AGC on**
+**Figure 27. Quad Channel USB data with AGC off/AGC on**
 
 ![](../images/agc_usb_output.png)
 
 
 ## KPI
 
-The memory and MCPS of Audio Enhancement with all AFE components enabled on PSOC&trade; Edge MCU is shown in the **Figure 24**,
+The memory and MCPS of Audio Enhancement with all AFE components enabled on PSOC&trade; Edge MCU is shown in the **Figure 28**,
 
-**Figure 25. Table showing the memory and MCPS for Audio Enhancement on PSOC&trade; Edge MCU**
+**Figure 28. Table showing the memory and MCPS for Audio Enhancement on PSOC&trade; Edge MCU**
 ![](../images/memory_mcps.png)
 
-**Figure 26. Table showing memory and MCPS for Automatic Gain Control**
+**Figure 29. Table showing memory and MCPS for Automatic Gain Control**
 
 ![](../images/agc_memory_mcps.png)
 
@@ -296,16 +354,20 @@ The custom linker scripts (depending on the Kit type) are placed in:
 
 - *\templates\TARGET_KIT_PSE84_AI\COMPONENT_CM55\TOOLCHAIN_ARM\pse84_ns_cm55.sct*
 
+- *\templates\TARGET_KIT_PSE84_HMI\COMPONENT_CM55\TOOLCHAIN_ARM\pse84_ns_cm55.sct*
+
 - *\templates\TARGET_KIT_PSE84_EVAL_EPC4\COMPONENT_CM55\TOOLCHAIN_LLVM_ARM\pse84_ns_cm55.ld*
 
 - *\templates\TARGET_KIT_PSE84_EVAL_EPC2\COMPONENT_CM55\TOOLCHAIN_ARM\pse84_ns_cm55.ld*
 
 - *\templates\TARGET_KIT_PSE84_AI\COMPONENT_CM55\TOOLCHAIN_LLVM_ARM\pse84_ns_cm55.ld*
 
+- *\templates\TARGET_KIT_PSE84_HMI\COMPONENT_CM55\TOOLCHAIN_LLVM_ARM\pse84_ns_cm55.ld*
+
 
 Depending on the chosen compiler and BSP, one of the above is used. The custom linker scripts are auto-copied to the BSP folder while importing the project. If you make any modifications to them, you have to manually copy them to the bsp folder.
 
-To profile the AFE middleware for the cycles: 
+To profile the AFE middleware for the cycles:
 
 1. Enable the following in the *Makefile* of *proj_cm55*:
 
@@ -314,7 +376,7 @@ To profile the AFE middleware for the cycles:
     COMPONENTS += PROFILER
     DEFINES += PROFILER_ENABLE
     ```
-2. Enable the following flag in 
+2. Enable the following flag in
 *proj_cm55\source\audio_enhancement_application\audio_enhancement\audio_enhancement_interface.h*:
 
     ```
@@ -323,7 +385,7 @@ To profile the AFE middleware for the cycles:
 
 The speech quality scores for every AFE component is shown as benchmark reference.
 
-**Figure 27. Table showing speech quality scores**
+**Figure 30. Table showing speech quality scores**
 ![](../images/ae_quality.png)
 
 > **Note:** To calculate the speech quality scores on the kit, you can generate your own test streams and see the Deep Noise Suppression Challenge repo on GitHub (https://github.com/microsoft/DNS-Challenge) for creating the Python scripts.
@@ -340,7 +402,7 @@ Following is a high-level overview of calculating speech quality scores. You can
 
 7. Run a python script to take the AE-processed data and clean data as input and calculate the score
 
-8. For AEC benchmarking, the test streams should have speech in one channel and AEC reference in the second. Set 
+8. For AEC benchmarking, the test streams should have speech in one channel and AEC reference in the second. Set
 `#define AEC_QUALITY_MODE (1)` in *audio_data_feed.c* for AEC benchmarking
 
 
@@ -348,7 +410,7 @@ Following is a high-level overview of calculating speech quality scores. You can
 
 To easily reproduce the results as shown in *Readme*, the code example contains a test stream. Set the code to `FUNCTIONAL` mode in common.mk.
 
-The test stream is available in 
+The test stream is available in
 *\ae_test_stream\ae_test_stream.wav*.
 
 1. Play it on any media player application. Use Audacity to record

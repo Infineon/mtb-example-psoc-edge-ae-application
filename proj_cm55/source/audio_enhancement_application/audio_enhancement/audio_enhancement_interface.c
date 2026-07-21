@@ -43,6 +43,14 @@
 #ifdef ENABLE_IFX_AGC
 #include "app_agc.h"
 #endif /* ENABLE_IFX_AGC */
+
+#ifndef COMPONENT_MW_MDL_DSNS
+#include "DSNS_LSTM_tflm_model_int16x8.h"
+
+uint32_t DSNS_LSTM_model_bin_len = DSNS_LSTM_MODEL_BIN_LEN;
+uint32_t DSNS_LSTM_arena_size = DSNS_LSTM_ARENA_SIZE;
+#endif
+
 /*******************************************************************************
 * Macros
 *******************************************************************************/
@@ -80,10 +88,10 @@ void license_limitation_exit()
  *  void
  *
  *******************************************************************************/
- 
+
 void audio_enhancement_process_output(ae_buffer_info_t *ae_output_buffer)
 {
-    
+
 #if defined(AE_FUNCTIONAL_MODE) || defined(ENABLE_IFX_AGC)
     int16_t *ae_proc_data = (int16_t *)ae_output_buffer->output_buf;
     int16_t *output_buffer = ae_proc_data;
@@ -109,13 +117,13 @@ void audio_enhancement_process_output(ae_buffer_info_t *ae_output_buffer)
 #ifdef ENABLE_IFX_AGC
     if (agc_process(output_buffer,agc_output)==AGC_SUCCESS)
     {
-/* If AGC is enabled, route the AFE processed and AGC processed data to USB channel 3 and 4 for evaluation*/        
+/* If AGC is enabled, route the AFE processed and AGC processed data to USB channel 3 and 4 for evaluation*/
 #ifdef AE_TUNING_MODE
         output_dgb3 = ae_proc_data;
         output_dgb4 = agc_output;
-#endif /* AE_TUNING_MODE */        
-/* In functional mode, send AGC processed data on channel 1*/    
-#ifdef AE_FUNCTIONAL_MODE    
+#endif /* AE_TUNING_MODE */
+/* In functional mode, send AGC processed data on channel 1*/
+#ifdef AE_FUNCTIONAL_MODE
         output_buffer = agc_output;
 #endif /* AE_FUNCTIONAL_MODE */
     } else {
@@ -123,7 +131,7 @@ void audio_enhancement_process_output(ae_buffer_info_t *ae_output_buffer)
     }
 
 #endif /* ENABLE_IFX_AGC */
-    
+
     if (ae_toggle_flag)
     {
 #ifdef AE_FUNCTIONAL_MODE
@@ -134,7 +142,7 @@ void audio_enhancement_process_output(ae_buffer_info_t *ae_output_buffer)
         usb_send_out_dbg_put(USB_CHANNEL_1,(int16_t *)output_dgb1);
         usb_send_out_dbg_put(USB_CHANNEL_2,(int16_t *)output_dgb2);
         usb_send_out_dbg_put(USB_CHANNEL_3,(int16_t *)output_dgb3);
-        usb_send_out_dbg_put(USB_CHANNEL_4,(int16_t *)output_dgb4);  
+        usb_send_out_dbg_put(USB_CHANNEL_4,(int16_t *)output_dgb4);
 #endif /* AE_TUNING_MODE */
     }
     else
@@ -144,7 +152,7 @@ void audio_enhancement_process_output(ae_buffer_info_t *ae_output_buffer)
         usb_send_out_dbg_put(USB_CHANNEL_3,(int16_t *)zero_buffer);
         usb_send_out_dbg_put(USB_CHANNEL_4,(int16_t *)zero_buffer);
 #endif /* AE_TUNING_MODE */
-    } 
+    }
     return;
 }
 
@@ -157,7 +165,7 @@ void audio_enhancement_process_output(ae_buffer_info_t *ae_output_buffer)
 *
 * Parameters:
 *  channels - number of input channels
-* 
+*
 * Return:
 *  Result of AE initialization.
 *
@@ -169,8 +177,8 @@ int ae_interface_init(int channels)
     ae_rslt_t result = AE_RSLT_SUCCESS;
 
     result = audio_enhancement_init(channels);
-    
-    if (result != AE_RSLT_SUCCESS) 
+
+    if (result != AE_RSLT_SUCCESS)
     {
         app_log_print("DEEPCRAFT Audio Enhancement initialization failed \r\n");
     }
@@ -185,7 +193,7 @@ int ae_interface_init(int channels)
 #ifdef ENABLE_IFX_AGC
     agc_init();
 #endif /* ENABLE_IFX_AGC*/
-    
+
     return result;
 }
 
@@ -202,7 +210,7 @@ int ae_interface_feed(void* audio_input, void* aec_buffer)
     cy_rslt_t result = CY_RSLT_SUCCESS;
 
     result = audio_enhancement_feed_input((int16_t*)audio_input, (int16_t*)aec_buffer);
-    
+
     if (AE_RSLT_LICENSE_ERROR == result)
     {
         app_log_print("CPU Halt: Audio Enhancement Restricted License Timeout - Reset the board \r\n");

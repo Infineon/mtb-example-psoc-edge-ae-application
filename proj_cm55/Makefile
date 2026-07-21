@@ -55,7 +55,7 @@ VERBOSE=
 # ... then code in directories named COMPONENT_foo and COMPONENT_bar will be
 # added to the build
 #
-COMPONENTS += FREERTOS RTOS_AWARE  
+COMPONENTS += FREERTOS RTOS_AWARE
 
 # Like COMPONENTS, but disable optional code that was enabled by default.
 DISABLE_COMPONENTS+=
@@ -67,7 +67,7 @@ CORE_NAME=CM55_0
 # tree for source code and builds it. The SOURCES variable can be used to
 # manually add source code to the build process from a location not searched
 # by default, or otherwise not found by the build system.
-SOURCES+=  
+SOURCES+=
 
 # Like SOURCES, but for include directories. Value should be paths to
 # directories (without a leading -I).
@@ -78,7 +78,7 @@ DEFINES += CY_RTOS_AWARE
 
 DEFINES += FLASH_BOOT
 
-# Select softfp or hardfp floating point. Default is softfp.
+# This CE supports only hardfp.
 VFP_SELECT = hardfp
 
 # Additional / custom C compiler flags.
@@ -94,7 +94,7 @@ ifeq ($(TOOLCHAIN),LLVM_ARM)
     endif
 else
     CFLAGS+=
-endif    
+endif
 # Additional / custom C++ compiler flags.
 #
 # NOTE: Includes and defines should use the INCLUDES and DEFINES variable
@@ -130,8 +130,23 @@ POSTBUILD+=
 # AGC_ON    - Enables AGC on Audio Enhancement processed data.
 # AGC_OFF   - Disables AGC on Audio Enhancement processed data. (Default value)
 CONFIG_AGC_MODE=AGC_OFF
+
+
+# Deep Subband Noise Suppression Model
+# DEFAULT_DSNS - Default DSNS model from audio-voice-core MW asset.
+# CUSTOM_DSNS  - Custom DSNS model trained via DSNS training scripts.
+CONFIG_DSNS_MODEL=DEFAULT_DSNS
+
+
 ifeq ($(CONFIG_AGC_MODE),AGC_ON)
     DEFINES += ENABLE_IFX_AGC
+endif
+
+ifeq ($(CONFIG_DSNS_MODEL),DEFAULT_DSNS)
+    COMPONENTS +=MW_MDL_DSNS
+endif
+ifeq ($(CONFIG_DSNS_MODEL),CUSTOM_DSNS)
+    COMPONENTS +=CUSTOM_DSNS
 endif
 
 DEFINES += CY_RETARGET_IO_CONVERT_LF_TO_CRLF
@@ -155,7 +170,7 @@ DEFINES += ENABLE_AFE_MW_SUPPORT
 DEFINES += CY_AFE_ENABLE_TUNING_FEATURE
 
 DEFINES+=DSNS_ENABLE_MTB_ML
-COMPONENTS+=MW_DSNS_MODEL MW_MDL_DSNS MW_MDL_DSES
+COMPONENTS+=MW_DSNS_MODEL MW_MDL_DSES
 DEFINES+=USE_MTB_ML
 
 
@@ -168,7 +183,7 @@ ifeq ($(CONFIG_VOICE_CORE_MODE),FULL)
     COMPONENTS+=AVC_FULL
 endif
 
-# DSNS and DSES with MTB-ML middleware 
+# DSNS and DSES with MTB-ML middleware
 NPU=U55
 DEFINES+=ETHOSU55
 COMPONENTS+=ML_TFLM
@@ -210,7 +225,7 @@ endif
 #Set processing block to 0x10 for 16kHz playback
 DEFINES+=TLV320DAC3100_PROCESSING_BLOCK=0x10
 
-#PDM mic settings - EVK 
+#PDM mic settings - EVK
 #GAIN_CONTROL_ON - to restrict max gain level
 DEFINES +=GAIN_CONTROL_ON
 DEFINES +=AFE_MIN_MIC_INPUT_HW_GAIN=-103.0
@@ -227,9 +242,9 @@ CY_APP_PATH=
 
 # Relative path to the shared repo location.
 #
-# All .mtb files have the format, <URI>#<COMMIT>#<LOCATION>. If the <LOCATION> field 
-# begins with $$ASSET_REPO$$, then the repo is deposited in the path specified by 
-# the CY_GETLIBS_SHARED_PATH variable. The default location is one directory level 
+# All .mtb files have the format, <URI>#<COMMIT>#<LOCATION>. If the <LOCATION> field
+# begins with $$ASSET_REPO$$, then the repo is deposited in the path specified by
+# the CY_GETLIBS_SHARED_PATH variable. The default location is one directory level
 # above the current app directory.
 # This is used with CY_GETLIBS_SHARED_NAME variable, which specifies the directory name.
 CY_GETLIBS_SHARED_PATH=../..
@@ -242,7 +257,7 @@ CY_GETLIBS_SHARED_NAME=mtb_shared
 #
 # The default depends on the selected TOOLCHAIN (GCC_ARM uses the ModusToolbox
 # software provided compiler by default).
-CY_COMPILER_PATH?=
+# CY_COMPILER_PATH?=
 
 CY_AFE_PATH=$(SEARCH_audio-front-end)
 CY_AVC_PATH=$(SEARCH_audio-voice-core)
