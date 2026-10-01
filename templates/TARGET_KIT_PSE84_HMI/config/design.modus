@@ -731,7 +731,7 @@
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
+                        <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
@@ -2118,7 +2118,7 @@
                         <Param id="inFlash" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="spi" version="3.0" instance="Fn83iZtj1n0">
+                <Personality template="spi" version="4.0" instance="Fn83iZtj1n0">
                     <Block location="scb[3]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_SPI_RADAR_CONTROLLER"/>
@@ -2220,7 +2220,7 @@
                         <Param id="inFlash" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="spi" version="3.0" instance="2Z1Skvz1LvA">
+                <Personality template="spi" version="4.0" instance="2Z1Skvz1LvA">
                     <Block location="scb[10]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_SPI_CONTROLLER"/>
@@ -2379,15 +2379,15 @@
                 <Personality template="eco" version="4.0" instance="UkGtniiUYyI">
                     <Block location="srss[0].clock[0].eco[0]" locked="true"/>
                     <Parameters>
-                        <Param id="accuracyPpm" value="0"/>
-                        <Param id="c1" value="20"/>
-                        <Param id="c2" value="20"/>
+                        <Param id="accuracyPpm" value="20"/>
+                        <Param id="c1" value="10"/>
+                        <Param id="c2" value="10"/>
                         <Param id="cload" value="16"/>
-                        <Param id="cmotional" value="9"/>
+                        <Param id="cmotional" value="1"/>
                         <Param id="cshunt" value="1"/>
-                        <Param id="ctrace" value="1"/>
+                        <Param id="ctrace" value="2"/>
                         <Param id="dls" value="100"/>
-                        <Param id="ec" value="0"/>
+                        <Param id="ec" value="1"/>
                         <Param id="ecoFrequency" value="17.2032"/>
                         <Param id="esr" value="200"/>
                     </Parameters>
