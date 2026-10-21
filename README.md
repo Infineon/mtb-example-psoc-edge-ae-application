@@ -189,6 +189,7 @@ Document title: *CE241960* - *PSOC&trade; Edge MCU: DEEPCRAFT&trade; Audio Enhan
  2.2.0   | Added support for PSOC&trade; Edge E84 AI Kit and  PSOC&trade; Edge E84 HMI Kit
  2.3.0   | Added support for custom DSNS model
  2.3.1   | ECO configurations update for KIT_PSE84_HMI
+ 2.3.2   | Updated the linker script to support LLVM ATfE v22.1.0
 <br>
 
 
